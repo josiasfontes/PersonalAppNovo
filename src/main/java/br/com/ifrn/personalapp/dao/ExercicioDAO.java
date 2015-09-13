@@ -13,12 +13,5 @@ public interface ExercicioDAO extends JpaRepository<Exercicio, Long>{
 	
 	public Exercicio findByNome(String nome);
 	
-	@Query(value = "select exercicio.nome from exercicio"
-			+ "inner join treino_has_exercicio "
-			+ "on exercicio.id_exercicio = treino_has_exercicio.id_exercicio"
-			+ "inner join treino"
-			+ "on treino_has_exercicio.id_treino = treino.id_treino"
-			+ "where treino.id_treino = ?1", nativeQuery = true)
-	public List<Exercicio> findByExercicioIdAndTreinoHasExercicioAndTreino(Long id);
-
+	public List<Exercicio> findByActive(boolean ativo);
 }

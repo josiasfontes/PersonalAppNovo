@@ -3,6 +3,7 @@ package br.com.ifrn.personalapp.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +19,13 @@ public class EnderecoController {
 
 	@Autowired EnderecoService enderecoService;
 
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "endereco/criar", method = RequestMethod.GET)
 	public ModelAndView formCriar(@ModelAttribute Endereco endereco) {
 		return new ModelAndView("endereco/form");
 	}
 
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "endereco/criar", method = RequestMethod.POST)
 	public void criarEndereco(@ModelAttribute Endereco endereco) {
 		if (endereco.getIdEndereco() == null) {
@@ -32,6 +35,7 @@ public class EnderecoController {
 		}
 	}
 	
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	@RequestMapping(value = "endereco/editar/{id}", method=RequestMethod.GET)
 	public ModelAndView formEditar(@PathVariable("id") Long id) {
 		return new ModelAndView("endereco/form", "endereco", enderecoService.getById(id));

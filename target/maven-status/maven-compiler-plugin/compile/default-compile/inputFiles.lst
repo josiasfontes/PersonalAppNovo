@@ -1,15 +1,18 @@
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/models/Mensalidade.java
+/home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/config/SecurityInitializer.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/controllers/PessoaController.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/controllers/AcademiaController.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/dao/MedidasDAO.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/service/PessoaService.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/Application.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/dao/EnderecoDAO.java
+/home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/config/WebSecurityConfig.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/dao/AcademiaDAO.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/controllers/MensalidadeController.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/dao/PessoaDAO.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/models/Endereco.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/models/Pessoa.java
+/home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/security/CurrentUserDetailsService.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/models/Treino.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/models/Exercicio.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/config/WebMvcConfig.java
@@ -21,6 +24,7 @@
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/controllers/MedidasController.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/controllers/TreinoController.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/service/AcademiaService.java
+/home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/models/Role.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/dao/MensalidadeDAO.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/service/MensalidadeService.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/dao/TreinoDAO.java
@@ -28,3 +32,4 @@
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/service/EnderecoService.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/models/Academia.java
 /home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/service/MedidasService.java
+/home/josias/Documentos/projetoComBootStrap/PersonalApp/src/main/java/br/com/ifrn/personalapp/security/CurrentUser.java

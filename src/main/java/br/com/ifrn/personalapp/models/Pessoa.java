@@ -1,23 +1,22 @@
 package br.com.ifrn.personalapp.models;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Pessoa {
+public class Pessoa{
 
 	@Id	@GeneratedValue
 	@Column(name = "ID_PESSOA")
@@ -38,7 +37,7 @@ public class Pessoa {
 	@Column(name = "IDADE", nullable = false)
 	public int idade;
 
-	@Column(name = "EMAIL", nullable = false)
+	@Column(name = "EMAIL", nullable = false, unique=true)
 	public String email;
 	
 	@Column(name = "SENHA", nullable = false)
@@ -54,10 +53,14 @@ public class Pessoa {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ACADEMIA_ID_ACADEMIA")
 	private Academia academia;
-
+	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "ENDERECO_ID_ENDERECO")
 	private Endereco endereco;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "role", length = 20, nullable = false)
+	private Role role;
 	
 	public Pessoa() {
 		endereco = new Endereco();
@@ -159,6 +162,14 @@ public class Pessoa {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 }

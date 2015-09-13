@@ -29,6 +29,9 @@ public class Treino {
 	
 	@Column(name="NOME")
 	private String nome;
+	
+	@Column(name="SERIE")
+	private String serie;
 
 	@Column(name="DATA_INICIO")
 	@Temporal(TemporalType.DATE)
@@ -80,6 +83,14 @@ public class Treino {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSerie() {
+		return serie;
+	}
+
+	public void setSerie(String serie) {
+		this.serie = serie;
 	}
 
 	public Date getDataInicio() {

@@ -13,4 +13,5 @@ public interface AcademiaDAO extends JpaRepository<Academia, Long> {
 	public Academia findByRazaosocial(String razaoSocial);
 	
 	public List<Academia> findByActive(boolean ativo);
+	
 }

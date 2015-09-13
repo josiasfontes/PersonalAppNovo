@@ -33,15 +33,6 @@ public class Academia {
 	@Column(name="CNPJ", nullable = false)
 	private int cnpj;
 	
-	@Column(name="NOME_RESPONSAVEL", nullable = false)
-	private String nomeresponsavel;
-	
-	@Column(name="LOGIN", nullable = false)
-	private String login;
-	
-	@Column(name="SENHA", nullable = false)
-	private String senha;
-	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="ENDERECO_ID_ENDERECO")
 	private Endereco endereco;
@@ -82,30 +73,6 @@ public class Academia {
 
 	public void setCnpj(int cnpj) {
 		this.cnpj = cnpj;
-	}
-
-	public String getNomeresponsavel() {
-		return nomeresponsavel;
-	}
-
-	public void setNomeresponsavel(String nomeresponsavel) {
-		this.nomeresponsavel = nomeresponsavel;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 
 	public Date getDataCadastro() {

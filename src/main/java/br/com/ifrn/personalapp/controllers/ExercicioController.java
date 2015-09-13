@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +21,13 @@ public class ExercicioController {
 
 	@Autowired ExercicioService exercicioService;
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "exercicio/criar", method = RequestMethod.GET)
 	public ModelAndView formCriar(@ModelAttribute Exercicio exercicio) {
 		return new ModelAndView("exercicio/form");
 	}
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "exercicio/criar", method = RequestMethod.POST)
 	public ModelAndView criarExercicio(@ModelAttribute Exercicio exercicio) {
 		if (exercicio.getIdExercicio() == null) {																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								
@@ -32,24 +35,34 @@ public class ExercicioController {
 		}else{
 			exercicioService.atualizarExercicio(exercicio);
 		}
-		return new ModelAndView("exercicio/listar","exercicios", exercicioService.exercicios());
+		return new ModelAndView("exercicio/listar","exercicios", exercicioService.exerciciosAtivos());
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "exercicio/ativar/{id}")
+	public ModelAndView ativarTreino(@PathVariable Long id) {
+		exercicioService.ativarOuDesativar(id);
+		return new ModelAndView("exercicio/listar","exercicios", exercicioService.exerciciosAtivos());
 	}
 	
 	//editar
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "exercicio/atualizar/{id}")
 	public ModelAndView updateExercicio(@PathVariable Exercicio exercicio, @PathVariable Long id) {
 		exercicio.setIdExercicio(id);
 		exercicioService.atualizarExercicio(exercicio);
-		return new ModelAndView("exercicio/listar","exercicios", exercicioService.exercicios());
+		return new ModelAndView("exercicio/listar","exercicios", exercicioService.exerciciosAtivos());
 	}
 	
 	//deletar
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "exercicio/deletar/{id}")
 	public ModelAndView deletarExercicio(@PathVariable Long id) {
 		exercicioService.removerExercicio(id);
-		return new ModelAndView("exercicio/listar","exercicios", exercicioService.exercicios());
+		return new ModelAndView("exercicio/listar","exercicios", exercicioService.exerciciosAtivos());
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "exercicio/editar/{id}", method=RequestMethod.GET)
 	public ModelAndView formEditar(@PathVariable("id") Long id) {
 		return new ModelAndView("exercicio/form", "exercicio", exercicioService.getById(id));
@@ -70,7 +83,7 @@ public class ExercicioController {
 	
 	@RequestMapping(value = "exercicio/listar", method = RequestMethod.GET) 
 	public ModelAndView listar() {
-		return new ModelAndView("exercicio/listar", "exercicios", exercicioService.exercicios());
+		return new ModelAndView("exercicio/listar", "exercicios", exercicioService.exerciciosAtivos());
 	}
 	
 	

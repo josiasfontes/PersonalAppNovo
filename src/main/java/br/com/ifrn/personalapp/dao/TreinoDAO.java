@@ -15,6 +15,8 @@ public interface TreinoDAO extends JpaRepository<Treino, Long> {
 	
 	public List<Treino> findBypessoaIdPessoa(Long id);
 	
+	public List<Treino> findBypessoaIdPessoaAndActive(Long id, boolean ativo);
+	
 	public List<Treino> findByActive(boolean ativo);
 	
 }

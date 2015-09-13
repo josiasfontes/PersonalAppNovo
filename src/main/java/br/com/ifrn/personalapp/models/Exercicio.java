@@ -20,6 +20,9 @@ public class Exercicio {
 	@Column(name="NOME", nullable = false)
 	private String nome;
 	
+	@Column(name = "ACTIVE")
+	private boolean active = true;
+	
 	@ManyToMany(mappedBy= "exercicios")
 	private Set<Treino> treinos = new HashSet<Treino>();  
 	
@@ -34,6 +37,12 @@ public class Exercicio {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 }

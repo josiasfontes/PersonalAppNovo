@@ -46,14 +46,14 @@
 	href="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"
 	rel="stylesheet" type="text/css" />
 
+
 </head>
 <body class="skin-blue sidebar-mini">
-
 	<div class="wrapper">
 
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="index.xhtml" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<a href="/" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini"><b>P</b>App</span> <!-- logo for regular state and mobile devices -->
 				<span class="logo-lg"><b>Personal</b>App</span>
 			</a>
@@ -70,8 +70,7 @@
 						<li class="dropdown user user-menu"><a href="#"
 							class="dropdown-toggle" data-toggle="dropdown"> <img
 								src="/resources/dist/img/user2-160x160.jpg" class="user-image"
-								alt="User Image" /> <span class="hidden-xs">Nome do
-									Usuário</span>
+								alt="User Image" /> <span class="hidden-xs">${academia.razaosocial}</span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
@@ -79,12 +78,12 @@
 									src="/resources/dist/img/user2-160x160.jpg" class="img-circle"
 									alt="User Image" />
 									<p>
-										Nome do Usuário <small>Administrador</small>
+										${academia.razaosocial} <small>Administrador</small>
 									</p></li>
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-right">
-										<a href="login.xhtml" class="btn btn-default btn-flat">Sair</a>
+										<a href="/login" class="btn btn-default btn-flat">Sair</a>
 									</div>
 								</li>
 							</ul></li>
@@ -103,20 +102,21 @@
 							class="img-circle" alt="User Image" />
 					</div>
 					<div class="pull-left info">
-						<p>Nome do Usuário</p>
+						<p>${academia.razaosocial}</p>
 					</div>
 				</div>
+
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">MENU</li>
-					<li class="active treeview"><a href="/academia/home/"> <i
+					<li class="active treeview"><a href="/"> <i
 							class="fa fa-fw fa-home"></i> <span>Home</span>
 					</a></li>
 					<li><a href="/pessoa/listar"> <i
-							class="fa fa-fw fa-user-plus"></i> <span>Alunos</span>
+							class="fa fa-users"></i> <span>Alunos</span>
 					</a></li>
-					<li><a href="/exercicio/criar"> <i
-							class="fa fa-fw fa-user-plus"></i> <span>Exercicio</span>
+					<li><a href="/exercicio/listar"> <i
+							class="fa fa-plus-circle"></i> <span> Exercicios</span>
 					</a></li>
 				</ul>
 			</section>
@@ -143,30 +143,30 @@
 									<form:input class="form-control" path="nome"
 										value="${treino.nome}" />
 									<br />
+									
+									<form:label path="serie">Serie</form:label>
+									<form:input class="form-control" path="serie"
+										value="${treino.serie}" />
+									<br />
 
 									<form:label path="observacao">Observacao</form:label>
 									<form:input class="form-control" path="observacao"
 										value="${treino.observacao}" />
 									<br />
 
-									<form:label path="pessoa.idPessoa">ID PESSOA</form:label>
-									<form:input class="form-control" path="pessoa.idPessoa"
-										value="${treino.pessoa.idPessoa}" />
-									<br />
-
 									<h4>Exercicios</h4>
 									<table class="table">
 										<thead>
 											<tr>
-												<th>Id Exercicio</th>
+												<th>Exercicio</th>
 												<th>Selecione</th>
 												<th>Nome</th>
 											</tr>
 										</thead>
 										<c:forEach items="${exercicios}" var="exercicio">
 											<tr>
-												<td>${exercicio.nome}</td>
-												<td><input class="form-control" type="checkbox"
+												<td>${exercicio.idExercicio}</td>
+												<td><input type="checkbox"
 													name="exercicios" value="${exercicio.idExercicio}"></td>
 												<td>${exercicio.nome}</td>
 											</tr>

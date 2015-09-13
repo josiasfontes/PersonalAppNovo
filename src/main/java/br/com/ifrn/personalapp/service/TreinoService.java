@@ -1,5 +1,6 @@
 package br.com.ifrn.personalapp.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -43,10 +44,16 @@ public class TreinoService {
 		return entityManager.merge(treino);
 	}
 	
-	public void ativarOuDesativar(Long id, boolean ativo) {
+	@Transactional
+	public void ativarOuDesativar(Long id) {
 		Treino t = treinoDAO.getOne(id);
-		t.setActive(ativo);
+		t.setActive(false);
+		t.setDataFim(new Date());
 		treinoDAO.save(t);
+	}
+	
+	public List<Treino> treinosPessoaAtivo(Long id) {
+		return treinoDAO.findBypessoaIdPessoaAndActive(id, true);
 	}
 	
 	public List<Treino> treinosPessoa(Long id) {

@@ -43,9 +43,9 @@ public class AcademiaService {
 		return entityManager.merge(academia);
 	}
 	
-	public void ativarOuDesativar(Long id, boolean ativo) {
+	public void ativarOuDesativar(Long id) {
 		Academia a = academiaDAO.getOne(id);
-		a.setActive(ativo);
+		a.setActive(false);
 		academiaDAO.save(a);
 	}
 	

@@ -3,6 +3,7 @@ package br.com.ifrn.personalapp.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +19,13 @@ public class MedidasController {
 
 	@Autowired MedidasService medidasService;
 
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "medidas/criar", method = RequestMethod.GET)
 	public ModelAndView formCriar(@ModelAttribute Medidas medidas) {
 		return new ModelAndView("medidas/form");
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "medidas/criar", method = RequestMethod.POST)
 	public ModelAndView criarMedidas(@ModelAttribute Medidas medidas) {
 		if (medidas.getIdMedidas() == null) {
@@ -33,6 +36,7 @@ public class MedidasController {
 		return new ModelAndView("medidas/listar","medidas", medidasService.medidas());
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "medidas/editar/{id}", method=RequestMethod.GET)
 	public ModelAndView formEditar(@PathVariable("id") Long id) {
 		return new ModelAndView("medidas/form", "medidas", medidasService.getById(id));
