@@ -139,7 +139,6 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<th>Id Treino</th>
 												<th>Nome</th>
 												<th>Data Inicio</th>
 												<th>Data Fim</th>
@@ -151,7 +150,6 @@
 											<c:forEach items="${treinos}" var="treino">
 												<c:if test="${!treino.active}">
 													<tr>
-														<td>${treino.idTreino}</td>
 														<td>${treino.nome}</td>
 														<td>${treino.dataInicio}</td>
 														<td>${treino.dataFim}</td>

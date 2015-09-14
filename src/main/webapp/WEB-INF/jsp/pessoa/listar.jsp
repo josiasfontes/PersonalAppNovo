@@ -138,6 +138,7 @@
 									<table class="table">
 										<thead>
 											<tr>
+												<th>Código Aluno</th>
 												<th>Nome</th>
 												<th>Gerenciar Aluno</th>
 												<th>Gerenciar Mensalidade</th>
@@ -148,6 +149,7 @@
 										<tbody>
 											<c:forEach items="${pessoas}" var="pessoa">
 												<tr>
+													<td>${pessoa.idPessoa}</td>
 													<td>${pessoa.nome}</td>
 													<td><a
 														href="${pageContext.request.contextPath}/informacoes/pessoa/${pessoa.idPessoa}">

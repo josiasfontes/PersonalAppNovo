@@ -91,8 +91,7 @@ public class PessoaController {
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "pessoa/editar/{id}", method = RequestMethod.GET)
 	public ModelAndView formEditar(@PathVariable("id") Long id) {
-		return new ModelAndView("pessoa/form", "pessoa",
-				pessoaService.getById(id));
+		return new ModelAndView("pessoa/form", "pessoa",pessoaService.getById(id));
 	}
 	
 	@Secured("ROLE_ADMIN")

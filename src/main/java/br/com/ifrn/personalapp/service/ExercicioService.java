@@ -45,6 +45,7 @@ public class ExercicioService {
 		exercicioDAO.delete(id);
 	}
 	
+	@Transactional
 	public Exercicio atualizarExercicio(Exercicio exercicio) {
 		return entityManager.merge(exercicio);
 	}

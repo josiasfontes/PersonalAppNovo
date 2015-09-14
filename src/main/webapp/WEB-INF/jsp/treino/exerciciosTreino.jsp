@@ -145,23 +145,19 @@
 									<table class="table">
 										<thead>
 											<tr>
-												<th>Id Treino</th>
+												<th>Treino</th>
 												<th>Nome</th>
-												<th>Remover</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${treino.exercicios}" var="treino">
+											<c:forEach items="${treino.exercicios}" var="exercicio">
 												<tr>
-													<td>${treino.idExercicio}</td>
-													<td>${treino.nome}</td>
-													<td><a
-														href="${pageContext.request.contextPath}/exercicio/deletar/${exercicio.idExercicio}">
-															<i class="btn btn-primary">Remover</i>
-													</a></td>
+													<td>${exercicio.idExercicio}</td>
+													<td>${exercicio.nome}</td>
 												</tr>
 											</c:forEach>
 										</tbody>
+										
 									</table>
 								</form:form>
 							</div>

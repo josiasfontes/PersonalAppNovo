@@ -68,6 +68,13 @@ public class ExercicioController {
 		return new ModelAndView("exercicio/form", "exercicio", exercicioService.getById(id));
 	}
 	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "exercicio/listar", method = RequestMethod.GET) 
+	public ModelAndView listar() {
+		return new ModelAndView("exercicio/listar", "exercicios", exercicioService.exerciciosAtivos());
+	}
+	
+	
 	// API Rest
 	@RequestMapping(value = "api/exercicios", method = RequestMethod.GET)
 	public List<Exercicio> exerciciosApi() {
@@ -79,11 +86,6 @@ public class ExercicioController {
 		response.setHeader("Access-Control-Allow-Origin","*");
 		response.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
 		return exercicioService.getById(id);
-	}
-	
-	@RequestMapping(value = "exercicio/listar", method = RequestMethod.GET) 
-	public ModelAndView listar() {
-		return new ModelAndView("exercicio/listar", "exercicios", exercicioService.exerciciosAtivos());
 	}
 	
 	

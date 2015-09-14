@@ -3,6 +3,7 @@ package br.com.ifrn.personalapp.service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,7 @@ public class MedidasService {
 		medidasDAO.delete(id);
 	}
 	
+	@Transactional
 	public Medidas atualizarMedidas(Medidas medidas) {
 		return entityManager.merge(medidas);
 	}

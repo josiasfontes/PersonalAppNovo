@@ -17,8 +17,6 @@ public interface PessoaDAO extends JpaRepository<Pessoa, Long>{
 	
 	public Pessoa findByEmail(String email);
 	
-	//public List<Pessoa> findBypessoaIdPessoaAndActive  (Long id, boolean ativo);
-	
 	public List<Pessoa> findByAcademiaIdAcademiaAndActiveAndRole(Long id, boolean ativo, Role role);	
 	
 

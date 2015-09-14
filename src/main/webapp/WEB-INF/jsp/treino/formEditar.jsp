@@ -154,7 +154,7 @@
 										value="${treino.observacao}" />
 									<br />
 									
-									<h4>Exercicios</h4>
+									<h4><b> Exercicios do Treino </b></h4>
 									<table class="table">
 										<thead>
 											<tr>

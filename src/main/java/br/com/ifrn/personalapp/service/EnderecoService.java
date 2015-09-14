@@ -3,6 +3,7 @@ package br.com.ifrn.personalapp.service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,7 @@ public class EnderecoService {
 		return enderecoDAO.save(endereco);
 	}		
 	
+	@Transactional
 	public Endereco atualizarEndereco(Endereco endereco) {
 		return entityManager.merge(endereco);
 	}
