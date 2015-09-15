@@ -3,6 +3,7 @@ package br.com.ifrn.personalapp.service;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,20 +28,30 @@ public class MensalidadeService {
 		return mensalidadeDAO.findOne(id);
 	}
 	
-	public Mensalidade getByNome(String status) {
+	
+	/*public Mensalidade getByNome(String status) {
 		return mensalidadeDAO.findByStatus(status);
-	}
+	}*/
 	
 	public Mensalidade salvarMensalidade(Mensalidade mensalidade) {
 		return mensalidadeDAO.save(mensalidade);
 	}		
 	
+	@Transactional
 	public Mensalidade atualizarMensalidade(Mensalidade mensalidade) {
 		return entityManager.merge(mensalidade);
 	}
 	
 	public List<Mensalidade> mensalidadePessoa(Long id) {
 		return mensalidadeDAO.findBypessoaIdPessoa(id);
+	}
+	
+	public List<Mensalidade> mensalidadesNaoPagaPessoa(Long id) {
+		return mensalidadeDAO.findBypessoaIdPessoaAndPago(id, false);
+	}
+	
+	public List<Mensalidade> mensalidadesPagaPessoa(Long id) {
+		return mensalidadeDAO.findBypessoaIdPessoaAndPago(id, true);
 	}
 	
 	public List<Mensalidade> mensalidades() {

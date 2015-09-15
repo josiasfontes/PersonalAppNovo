@@ -95,7 +95,7 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Cadastrar Dono de Academia</h1>
+				<h1>Histórico de Mensalidades</h1>
 			</section>
 
 			<section class="content">
@@ -103,90 +103,38 @@
 					<div class="col-md-12">
 						<div class="box box-primary">
 							<div class="box-body">
-								<form:form modelAttribute="pessoa" method="post" action="/pessoa/criarAdmin">
 
-									<form:hidden path="idPessoa" value="${pessoa.idPessoa}" />
+								<form:form role="form">
+									<table class="table">
+										<thead>
+											<tr>
 
-									<form:label path="nome">Nome</form:label>
-									<form:input class="form-control" path="nome"
-										value="${pessoa.nome}" />
-									<br />
-
-									<form:label path="cpf">CPF</form:label>
-									<form:input class="form-control" path="cpf"
-										value="${pessoa.cpf}" />
-									<br />
-
-									<form:label path="sexo">Sexo</form:label>
-									<form:input class="form-control" path="sexo"
-										value="${pessoa.sexo}" />
-									<br />
-
-									<form:label path="idade">Idade</form:label>
-									<form:input class="form-control" path="idade"
-										value="${pessoa.idade}" />
-									<br />
-
-									<form:label path="email">Email</form:label>
-									<form:input class="form-control" path="email"
-										value="${pessoa.email}" />
-									<br />
-
-									<form:label path="senha">Senha</form:label>
-									<form:input type="password" class="form-control" path="senha"
-										value="${pessoa.senha}" />
-									<br />
-
-									<form:label path="telefone">Telefone</form:label>
-									<form:input class="form-control" path="telefone"
-										value="${pessoa.telefone}" />
-									<br />
-
-									<form:hidden path="endereco.idEndereco"
-										value="${pessoa.endereco.idEndereco}" />
-									
-									<form:label path="endereco.cep">CEP</form:label>
-									<form:input class="form-control" path="endereco.cep"
-										value="${pessoa.endereco.cep}" />
-									<br />
-
-									<form:label path="endereco.logradouro">Logradouro</form:label>
-									<form:input class="form-control" path="endereco.logradouro"
-										value="${pessoa.endereco.logradouro}" />
-									<br />
-
-									<form:label path="endereco.bairro">Bairro</form:label>
-									<form:input class="form-control" path="endereco.bairro"
-										value="${pessoa.endereco.bairro}" />
-									<br />
-
-									<form:label path="endereco.numero">Numero</form:label>
-									<form:input class="form-control" path="endereco.numero"
-										value="${pessoa.endereco.numero}" />
-									<br />
-
-									<form:label path="endereco.complemento">Complemento</form:label>
-									<form:input class="form-control" path="endereco.complemento"
-										value="${pessoa.endereco.complemento}" />
-									<br />
-
-									<form:label path="endereco.cidade">Cidade</form:label>
-									<form:input class="form-control" path="endereco.cidade"
-										value="${pessoa.endereco.cidade}" />
-									<br />
-
-									<form:label path="endereco.estado">Estado</form:label>
-									<form:input class="form-control" path="endereco.estado"
-										value="${pessoa.endereco.estado}" />
-									<br />
-									<form:button class="btn btn-primary" type="submit">Enviar</form:button>
+												<th>Valor</th>
+												<th>Data de Vencimanto</th>
+												<th>Ultimo Pagamento</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${mensalidades}" var="mensalidade">
+												<tr>
+													<td>${mensalidade.valor}</td>
+													<td>${mensalidade.dataVencimento}</td>
+													<td>${mensalidade.ultimoPagamento}</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
 								</form:form>
+								<div class="box-footer clearfix">
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br> <br> <br>
 			<footer class="main-footer">
 				<div class="pull-right hidden-xs">
 					<b>Version</b> 2.0

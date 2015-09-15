@@ -1,5 +1,7 @@
 package br.com.ifrn.personalapp.controllers;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ import br.com.ifrn.personalapp.service.PessoaService;
 public class MensalidadeController {
 
 	Pessoa pessoa = new Pessoa();
+	Pessoa p = new Pessoa();
+	
 	
 	@Autowired MensalidadeService mensalidadeService;
 	@Autowired PessoaService pessoaService;
@@ -41,9 +45,37 @@ public class MensalidadeController {
 		} else {
 			mensalidadeService.atualizarMensalidade(mensalidade);
 		}
-		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return new ModelAndView("pessoa/listar", "pessoas",pessoaService.pessoasPorAcademiaAtivas(currentUser.getId()));
-		//return new ModelAndView("mensalidade/listar", "mensalidades",mensalidadeService.mensalidadePessoa(pessoa.getIdPessoa()));
+		CurrentUser currentUser = (CurrentUser) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+
+		p = pessoaService.pessoasPorId(currentUser.getId());
+
+		return new ModelAndView("pessoa/listar", "pessoas",
+				pessoaService.pessoasPorAcademiaAtivas(p.getAcademia().getIdAcademia()));
+		
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "mensalidade/pagar/{id}", method=RequestMethod.GET)
+	public ModelAndView pagar(@PathVariable("id") Long id) {
+		Mensalidade m = mensalidadeService.getById(id);
+		Date data = new Date();
+		m.setPago(true);
+		m.setUltimoPagamento(data);
+		
+		Calendar c = Calendar.getInstance();
+	 	c.setTime(data);
+	 	c.add(Calendar.DATE, +30);
+	 	data = c.getTime();
+		
+		m.setDataVencimento(data);
+		mensalidadeService.atualizarMensalidade(m);
+		
+		CurrentUser currentUser = (CurrentUser) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+		p = pessoaService.pessoasPorId(currentUser.getId());
+		return new ModelAndView("pessoa/listar", "pessoas",
+				pessoaService.pessoasPorAcademiaAtivas(p.getAcademia().getIdAcademia()));
 	}
 	
 	@Secured("ROLE_ADMIN")
@@ -55,16 +87,21 @@ public class MensalidadeController {
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "mensalidade/listar", method = RequestMethod.GET) 
 	public ModelAndView listar() {
-		return new ModelAndView("mensalidade/listar", "mensalidades",mensalidadeService.mensalidadePessoa(pessoa.getIdPessoa()));
+		return new ModelAndView("mensalidade/listar", "mensalidades",mensalidadeService.mensalidadesNaoPagaPessoa(pessoa.getIdPessoa()));
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "historicomensalidades/listar", method = RequestMethod.GET) 
+	public ModelAndView historico() {
+		return new ModelAndView("mensalidade/listarHistorico", "mensalidades",mensalidadeService.mensalidadesPagaPessoa(pessoa.getIdPessoa()));
 	}
 	
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "mensalidades/pessoa/{id}", method = RequestMethod.GET)
 	public ModelAndView mensalidadePessoa(@PathVariable("id") Long id) {
 		pessoa.setIdPessoa(id);
-		return new ModelAndView("mensalidade/listar", "mensalidades",mensalidadeService.mensalidadePessoa(id));
+		return new ModelAndView("mensalidade/listar", "mensalidades",mensalidadeService.mensalidadesNaoPagaPessoa(id));
 	}
-
 	
 	// API Rest
 	@RequestMapping(value = "api/mensalidades", method = RequestMethod.GET)

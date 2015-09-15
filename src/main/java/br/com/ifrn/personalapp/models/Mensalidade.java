@@ -1,10 +1,8 @@
 package br.com.ifrn.personalapp.models;
 
+import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -35,15 +32,20 @@ public class Mensalidade {
 	private Date dataVencimento;
 	
 	@Column(name="STATUS", nullable = false)
-	public String status;
+	private boolean pago = false;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PESSOA_ID_PESSOA")
 	private Pessoa pessoa;
 	
 	public Mensalidade(){
-		setDataVencimento(new Date());
-		setUltimoPagamento(new Date());
+		Date data = new Date();
+	 	Calendar c = Calendar.getInstance();
+	 	c.setTime(data);
+	 	c.add(Calendar.DATE, +30);
+	 	data = c.getTime();
+		setDataVencimento(data);
+		//setUltimoPagamento(new Date());
 	}
 
 	public Long getIdMensalidade() {
@@ -78,12 +80,12 @@ public class Mensalidade {
 		this.dataVencimento = dataVencimento;
 	}
 
-	public String getStatus() {
-		return status;
+	public boolean isPago() {
+		return pago;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setPago(boolean pago) {
+		this.pago = pago;
 	}
 
 	public Pessoa getPessoa() {

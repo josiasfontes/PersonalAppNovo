@@ -64,30 +64,9 @@
 					role="button"> <span class="sr-only">Toggle navigation</span>
 				</a>
 				<div class="navbar-custom-menu">
-					<ul class="nav navbar-nav">
-
-						<!-- User Account: style can be found in dropdown.less -->
-						<li class="dropdown user user-menu"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> <img
-								src="/resources/dist/img/user2-160x160.jpg" class="user-image"
-								alt="User Image" /> <span class="hidden-xs">${academia.razaosocial}</span>
-						</a>
-							<ul class="dropdown-menu">
-								<!-- User image -->
-								<li class="user-header"><img
-									src="/resources/dist/img/user2-160x160.jpg" class="img-circle"
-									alt="User Image" />
-									<p>
-										${academia.razaosocial} <small>Administrador</small>
-									</p></li>
-								<!-- Menu Footer-->
-								<li class="user-footer">
-									<div class="pull-right">
-										<a href="/logout" class="btn btn-default btn-flat">Sair</a>
-									</div>
-								</li>
-							</ul></li>
-					</ul>
+					<div class="pull-right">
+						<a href="/logout" class="btn btn-primary">SAIR</a>
+					</div>
 				</div>
 			</nav>
 		</header>
@@ -95,16 +74,6 @@
 		<aside class="main-sidebar">
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
-				<!-- Sidebar user panel -->
-				<div class="user-panel">
-					<div class="pull-left image">
-						<img src="/resources/dist/img/user2-160x160.jpg"
-							class="img-circle" alt="User Image" />
-					</div>
-					<div class="pull-left info">
-						<p>${academia.razaosocial}</p>
-					</div>
-				</div>
 
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
@@ -112,8 +81,8 @@
 					<li class="active treeview"><a href="/"> <i
 							class="fa fa-fw fa-home"></i> <span>Home</span>
 					</a></li>
-					<li><a href="/pessoa/listar"> <i
-							class="fa fa-users"></i> <span>Alunos</span>
+					<li><a href="/pessoa/listar"> <i class="fa fa-users"></i>
+							<span>Alunos</span>
 					</a></li>
 					<li><a href="/exercicio/listar"> <i
 							class="fa fa-plus-circle"></i> <span> Exercicios</span>
@@ -135,60 +104,58 @@
 						<div class="box box-primary">
 							<div class="box-body">
 
-<form:form role="form">
-<table class="table">
-	<thead>
-		<tr>
-			
-			<th>Valor</th>
-			<th>Ultimo Pagamento</th>
-			<th>Data de Vencimanto</th>
-			<th>Status</th>
-			<th>Editar</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach items="${mensalidades}" var="mensalidade">
-			<tr>
-				<td>${mensalidade.valor}</td>
-				<td>${mensalidade.ultimoPagamento}</td>
-				<td>${mensalidade.dataVencimento}</td>
-				<td>${mensalidade.status}</td>
-				<td><a
-					href="${pageContext.request.contextPath}/mensalidade/editar/${mensalidade.idMensalidade}">
-						<i class="btn btn-primary">Editar</i>
-				</a></td>
-				
-			</tr>
-		</c:forEach>
-	</tbody>
-</table>
-</form:form>
-				<div class="box-footer clearfix">
-                	<a href="/mensalidade/criar/${mensalidade.idMensalidade}">
-                		<i class="fa fa-fw fa-user-plus"></i> <span>Nova Mensalidade</span>
-              		</a>
-            	</div>
+								<form:form role="form">
+									<table class="table">
+										<thead>
+											<tr>
+
+												<th>Valor</th>
+												<th>Data de Vencimanto</th>
+												<th>Ultimo Pagamento</th>
+												<th>Status</th>
+												<th>Editar</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${mensalidades}" var="mensalidade">
+												<tr>
+													<td>${mensalidade.valor}</td>
+													<td>${mensalidade.dataVencimento}</td>
+													<td>${mensalidade.ultimoPagamento}</td>
+													<td>${mensalidade.pago}</td>
+													<td><a
+														href="${pageContext.request.contextPath}/mensalidade/pagar/${mensalidade.idMensalidade}">
+															<i class="btn btn-primary">Pagar</i>
+													</a></td>
+
+													<td><a
+														href="${pageContext.request.contextPath}/mensalidade/editar/${mensalidade.idMensalidade}">
+															<i class="btn btn-primary">Editar</i>
+													</a></td>
+
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</form:form>
+								<div class="box-footer clearfix">
+									<a href="/mensalidade/criar/${mensalidade.idMensalidade}">
+										<i class="fa fa-money"></i> <span>Nova
+											Mensalidade</span>
+									</a>
+									<a href="/historicomensalidades/listar/"> <i
+											class="fa fa-clock-o"></i> <span>Histórico
+												Mensalidades</span>
+									</a>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+			<br> <br> <br> <br> <br> <br> <br>
+			<br> <br> <br> <br> <br> <br> <br>
 			<footer class="main-footer">
 				<div class="pull-right hidden-xs">
 					<b>Version</b> 2.0

@@ -12,6 +12,8 @@ public interface MensalidadeDAO extends JpaRepository<Mensalidade, Long>{
 	
 	public List<Mensalidade> findBypessoaIdPessoa(Long id);
 	
-	public Mensalidade findByStatus(String status);
+	public List<Mensalidade> findBypessoaIdPessoaAndPago(Long id, boolean pago);
+	
+	/*public Mensalidade findByStatus( status);*/
 
 }

@@ -24,33 +24,29 @@ import br.com.ifrn.personalapp.service.PessoaService;
 
 @RestController
 public class AcademiaController {
-	
-	@Autowired AcademiaService academiaService;
-	@Autowired PessoaService pessoaService;
-	
+
+	@Autowired
+	AcademiaService academiaService;
+	@Autowired
+	PessoaService pessoaService;
+
 	Academia academiaTeste = new Academia();
 	Academia pessoaAcademia = new Academia();
 	Pessoa p = new Pessoa();
-	
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView homeAdmin() {
-		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//if (academiaTeste.getIdAcademia() == null) {
+		CurrentUser currentUser = (CurrentUser) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+
 		p = pessoaService.pessoasPorId(currentUser.getId());
-		
-		//pessoaAcademia = academiaService.getById(p.getAcademia().getIdAcademia());
-		
-		//pessoa.setAcademia(p.getAcademia());
-			
-			
-			return new ModelAndView("academia/home","academia", academiaService.getById(p.getAcademia().getIdAcademia()));
-		//}else{
-			//return new ModelAndView("academia/home","academia", academiaService.getById(academiaTeste.getIdAcademia()));
-		//}
+
+		return new ModelAndView("academia/home", "academia",
+				academiaService.getById(p.getAcademia().getIdAcademia()));
+
 	}
-	
+
 	@RequestMapping(value = "academia/criar", method = RequestMethod.GET)
 	public ModelAndView formCriar(@ModelAttribute Academia academia) {
 		return new ModelAndView("academia/form");
@@ -58,21 +54,20 @@ public class AcademiaController {
 
 	@RequestMapping(value = "academia/criar", method = RequestMethod.POST)
 	public ModelAndView criarAcademia(@ModelAttribute Academia academia) {
-		if (academia.getIdAcademia() == null) {																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								
+		if (academia.getIdAcademia() == null) {
 			academiaService.salvarAcademia(academia);
-		}else{
+		} else {
 			academiaService.atualizarAcademia(academia);
 		}
 		academiaTeste.setIdAcademia(academia.getIdAcademia());
 		return new ModelAndView(new RedirectView("pessoaAdmin/criar"));
 	}
-	
-	
+
 	@RequestMapping(value = "academia/pessoaAdmin/criar", method = RequestMethod.GET)
 	public ModelAndView formCriarAdmin(@ModelAttribute Pessoa pessoa) {
 		return new ModelAndView("pessoa/formAdmin");
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "academia/ativar/{id}")
 	public ModelAndView ativarAcademia(@PathVariable Long id) {
@@ -80,35 +75,36 @@ public class AcademiaController {
 		return new ModelAndView("academia/listar", "academias",
 				academiaService.academiasAtivas());
 	}
-	
+
 	@Secured("ROLE_ADMIN")
-	@RequestMapping(value = "academia/editar/{id}", method=RequestMethod.GET)
+	@RequestMapping(value = "academia/editar/{id}", method = RequestMethod.GET)
 	public ModelAndView formEditar(@PathVariable("id") Long id) {
-		return new ModelAndView("academia/form", "academia", academiaService.getById(id));
+		return new ModelAndView("academia/form", "academia",
+				academiaService.getById(id));
 	}
-	
+
 	@Secured("ROLE_ADMIN")
-	@RequestMapping(value = "academia/listar", method = RequestMethod.GET) 
+	@RequestMapping(value = "academia/listar", method = RequestMethod.GET)
 	public ModelAndView listar() {
-		return new ModelAndView("academia/listar", "academias", 
+		return new ModelAndView("academia/listar", "academias",
 				academiaService.academiasAtivas());
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "academia/listartudo", method = RequestMethod.GET)
 	public ModelAndView listarTudo() {
 		return new ModelAndView("academia/listar", "academias",
 				academiaService.academias());
 	}
-		
+
 	// API Rest
 	@RequestMapping(value = "api/academias", method = RequestMethod.GET)
 	public List<Academia> academiasApi() {
 		return academiaService.academias();
 	}
-	
+
 	@RequestMapping(value = "api/academia/{id}", method = RequestMethod.GET)
 	public Academia academiaApi(@PathVariable("id") Long id) {
 		return academiaService.getById(id);
-	}	
+	}
 }
