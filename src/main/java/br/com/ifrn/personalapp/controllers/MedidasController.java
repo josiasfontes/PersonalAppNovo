@@ -26,6 +26,7 @@ public class MedidasController {
 
 	Academia pessoaAcademia = new Academia();
 	Pessoa p = new Pessoa();
+	Pessoa pessoaMedidas = new Pessoa();
 	
 	@Autowired
 	MedidasService medidasService;
@@ -50,12 +51,14 @@ public class MedidasController {
 			Pessoa pessoa = pessoas.get(pessoas.size() - 1);
 			medidas.setPessoa(pessoa);
 			medidasService.salvarMedidas(medidas);
+		
 		} else {
+			medidas.setPessoa(pessoaMedidas);
 			medidasService.atualizarMedidas(medidas);
 		}
+		
 		CurrentUser currentUser = (CurrentUser) SecurityContextHolder
 				.getContext().getAuthentication().getPrincipal();
-
 		p = pessoaService.pessoasPorId(currentUser.getId());
 
 		return new ModelAndView("pessoa/listar", "pessoas",
@@ -71,6 +74,7 @@ public class MedidasController {
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "medidasPessoa/listar/{id}", method = RequestMethod.GET)
 	public ModelAndView medidasPessoa(@PathVariable("id") Long id) {
+		pessoaMedidas = medidasService.medidasPessoa(id).getPessoa();
 		return new ModelAndView("medidas/medidasPessoa", "medidas",
 				medidasService.medidasPessoa(id));
 	}

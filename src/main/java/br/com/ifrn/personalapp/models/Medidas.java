@@ -58,7 +58,7 @@ public class Medidas {
 	private float panturrilhaEsquerda;
 	
 	//@ManyToOne(cascade = CascadeType.ALL)
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="PESSOA_ID_PESSOA")
 	private Pessoa pessoa;
 	

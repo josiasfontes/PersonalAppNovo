@@ -44,17 +44,17 @@ public class TreinoController {
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "treino/criar", method = RequestMethod.POST)
 	public ModelAndView criarTreino(@ModelAttribute Treino treino) {
+		
 		treino.setPessoa(pessoa);
 		if (treino.getIdTreino() == null) {		
 			treinoService.salvarTreino(treino);
 		}else{
 			treinoService.atualizarTreino(treino);
 		}
+		
 		CurrentUser currentUser = (CurrentUser) SecurityContextHolder
 				.getContext().getAuthentication().getPrincipal();
-
 		p = pessoaService.pessoasPorId(currentUser.getId());
-
 		return new ModelAndView("pessoa/listar", "pessoas",
 				pessoaService.pessoasPorAcademiaAtivas(p.getAcademia().getIdAcademia()));
 	}
