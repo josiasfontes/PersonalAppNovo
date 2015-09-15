@@ -19,5 +19,6 @@ public interface PessoaDAO extends JpaRepository<Pessoa, Long>{
 	
 	public List<Pessoa> findByAcademiaIdAcademiaAndActiveAndRole(Long id, boolean ativo, Role role);	
 	
+	public Pessoa findByIdPessoa(Long id);	
 
 }

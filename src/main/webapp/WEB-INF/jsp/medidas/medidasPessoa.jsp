@@ -112,8 +112,8 @@
 					<li class="active treeview"><a href="/"> <i
 							class="fa fa-fw fa-home"></i> <span>Home</span>
 					</a></li>
-					<li><a href="/pessoa/listar"> <i
-							class="fa fa-users"></i> <span>Alunos</span>
+					<li><a href="/pessoa/listar"> <i class="fa fa-users"></i>
+							<span>Alunos</span>
 					</a></li>
 					<li><a href="/exercicio/listar"> <i
 							class="fa fa-plus-circle"></i> <span> Exercicios</span>
@@ -126,7 +126,7 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Histórico Treinos</h1>
+				<h1>Medidas</h1>
 			</section>
 
 			<section class="content">
@@ -138,39 +138,73 @@
 								<form:form role="form">
 									<table class="table">
 										<thead>
-											<tr>
-												<th>Nome</th>
-												<th>Data Inicio</th>
-												<th>Data Fim</th>
-												<th>Observação</th>
-											</tr>
 										</thead>
 										<tbody>
-
-											<c:forEach items="${treinos}" var="treino">
-												<c:if test="${!treino.active}">
-													<tr>
-														<td>${treino.nome}</td>
-														<td>${treino.dataInicio}</td>
-														<td>${treino.dataFim}</td>
-														<td>${treino.observacao}</td>
-													</tr>
-												</c:if>
-
-											</c:forEach>
-
+											<tr>
+												<th>Altura</th>
+												<td>${medidas.altura}</td>
+											</tr>
+											<tr>
+												<th>Peso</th>
+												<td>${medidas.peso}</td>
+											</tr>
+											<tr>
+												<th>Biceps Direito</th>
+												<td>${medidas.bicepsDireito}</td>
+											</tr>
+											<tr>
+												<th>Biceps Esquerdo</th>
+												<td>${medidas.bicepsEsquerdo}</td>
+											</tr>
+											<tr>
+												<th>Triceps Direito</th>
+												<td>${medidas.tricepsDireito}</td>
+											</tr>
+											<tr>
+												<th>Triceps Esquerdo</th>
+												<td>${medidas.tricepsEsquerdo}</td>
+											</tr>
+											<tr>
+												<th>Peitoral</th>
+												<td>${medidas.peitoral}</td>
+											</tr>
+											<tr>
+												<th>Abdomen</th>
+												<td>${medidas.abdomen}</td>
+											</tr>
+											<tr>
+												<th>Quadril</th>
+												<td>${medidas.quadril}</td>
+											</tr>
+											<tr>
+												<th>Coxa Direita</th>
+												<td>${medidas.coxaDireita}</td>
+											</tr>
+											<tr>
+												<th>Coxa Esquerda</th>
+												<td>${medidas.coxaEsquerda}</td>
+											</tr>
+											<tr>
+												<th>Gluteo</th>
+												<td>${medidas.gluteo}</td>
+											</tr>
+											<tr>
+												<th>Panturrilha Direita</th>
+												<td>${medidas.panturrilhaDireita}</td>
+											</tr>
+											<tr>
+												<th>Panturrilha Esquerda</th>
+												<td>${medidas.panturrilhaEsquerda}</td>
+											</tr>
+											<tr>
+												<td><a
+													href="${pageContext.request.contextPath}/medidas/editar/${medidas.idMedidas}">
+														<i class="btn btn-primary">Editar Medidas</i>
+												</a></td>
+											</tr>
 										</tbody>
-
 									</table>
-									<c:forEach items="${treinos}" var="treino">
-										<c:set var="idAluno" value="${treino.pessoa.idPessoa}" />
-									</c:forEach>
-									<a href="/treinos/pessoa/${idAluno}"> <i
-											class="fa fa-fw fa-user-plus"></i> <span>Treinos
-												Atuais</span>
-									</a>
 								</form:form>
-
 							</div>
 						</div>
 					</div>

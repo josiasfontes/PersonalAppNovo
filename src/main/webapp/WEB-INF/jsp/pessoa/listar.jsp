@@ -83,7 +83,7 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-right">
-										<a href="/login" class="btn btn-default btn-flat">Sair</a>
+										<a href="/logout" class="btn btn-default btn-flat">Sair</a>
 									</div>
 								</li>
 							</ul></li>
@@ -141,6 +141,7 @@
 												<th>Código Aluno</th>
 												<th>Nome</th>
 												<th>Gerenciar Aluno</th>
+												<th>Gerenciar Medidas</th>
 												<th>Gerenciar Mensalidade</th>
 												<th>Gerenciar Treino</th>
 												<th>Remover</th>
@@ -154,6 +155,10 @@
 													<td><a
 														href="${pageContext.request.contextPath}/informacoes/pessoa/${pessoa.idPessoa}">
 															<i class="glyphicon glyphicon-edit"></i> Gerenciar Aluno
+													</a></td>
+													<td><a
+														href="${pageContext.request.contextPath}/medidasPessoa/listar/${pessoa.idPessoa}">
+															<i class="glyphicon glyphicon-edit"></i> Gerenciar Medidas
 													</a></td>
 													<td><a
 														href="${pageContext.request.contextPath}/mensalidades/pessoa/${pessoa.idPessoa}">

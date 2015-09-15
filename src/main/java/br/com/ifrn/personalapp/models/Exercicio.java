@@ -20,6 +20,9 @@ public class Exercicio {
 	@Column(name="NOME", nullable = false)
 	private String nome;
 	
+	@Column(name="SERIE")
+	private String serie;
+	
 	@Column(name = "ACTIVE")
 	private boolean active = true;
 	
@@ -37,6 +40,13 @@ public class Exercicio {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getSerie() {
+		return serie;
+	}
+	public void setSerie(String serie) {
+		this.serie = serie;
 	}
 	public boolean isActive() {
 		return active;

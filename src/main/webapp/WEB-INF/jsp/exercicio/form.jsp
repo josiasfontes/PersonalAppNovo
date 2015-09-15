@@ -83,7 +83,7 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-right">
-										<a href="/login" class="btn btn-default btn-flat">Sair</a>
+										<a href="/logout" class="btn btn-default btn-flat">Sair</a>
 									</div>
 								</li>
 							</ul></li>
@@ -112,8 +112,8 @@
 					<li class="active treeview"><a href="/"> <i
 							class="fa fa-fw fa-home"></i> <span>Home</span>
 					</a></li>
-					<li><a href="/pessoa/listar"> <i
-							class="fa fa-users"></i> <span>Alunos</span>
+					<li><a href="/pessoa/listar"> <i class="fa fa-users"></i>
+							<span>Alunos</span>
 					</a></li>
 					<li><a href="/exercicio/listar"> <i
 							class="fa fa-plus-circle"></i> <span> Exercicios</span>
@@ -143,6 +143,11 @@
 											value="${exercicio.idExercicio}" />
 										<form:input class="form-control" path="nome"
 											value="${exercicio.nome}" />
+
+										<form:label path="serie">Serie</form:label>
+										<form:input class="form-control" path="serie"
+											value="${exercicio.serie}" />
+										<br />
 									</div>
 									<form:button class="btn btn-primary" type="submit">Enviar</form:button>
 								</form:form>

@@ -1,5 +1,6 @@
 package br.com.ifrn.personalapp.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,7 +56,8 @@ public class Medidas {
 	
 	@Column(name="PANTURRILHA_ESQUERDA")
 	private float panturrilhaEsquerda;
-		
+	
+	//@ManyToOne(cascade = CascadeType.ALL)
 	@ManyToOne
 	@JoinColumn(name="PESSOA_ID_PESSOA")
 	private Pessoa pessoa;

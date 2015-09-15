@@ -83,7 +83,7 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-right">
-										<a href="/login" class="btn btn-default btn-flat">Sair</a>
+										<a href="/logout" class="btn btn-default btn-flat">Sair</a>
 									</div>
 								</li>
 							</ul></li>
@@ -207,11 +207,6 @@
 										<form:label path="panturrilhaEsquerda">Panturrilha Esquerda</form:label>
 										<form:input class="form-control" path="panturrilhaEsquerda"
 											value="${medidas.panturrilhaEsquerda}" />
-										<br />
-
-										<form:label path="pessoa.idPessoa">ID PESSOA</form:label>
-										<form:input class="form-control" path="pessoa.idPessoa"
-											value="${medidas.pessoa.idPessoa}" />
 										<br />
 
 									</div>

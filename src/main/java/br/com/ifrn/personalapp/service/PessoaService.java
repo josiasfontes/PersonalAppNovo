@@ -60,6 +60,11 @@ public class PessoaService {
 		pessoaDAO.save(p);
 	}
 	
+	//getPessoaPeloId
+	public Pessoa pessoasPorId(Long id) {
+		return pessoaDAO.findByIdPessoa(id);
+	}
+	
 	public List<Pessoa> pessoas() {
 		return pessoaDAO.findAll();
 	}

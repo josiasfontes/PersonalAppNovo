@@ -83,7 +83,7 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-right">
-										<a href="/login" class="btn btn-default btn-flat">Sair</a>
+										<a href="/logout" class="btn btn-default btn-flat">Sair</a>
 									</div>
 								</li>
 							</ul></li>
@@ -164,7 +164,7 @@
 									<br />
 
 									<form:label path="senha">Senha</form:label>
-									<form:input class="form-control" path="senha"
+									<form:input type="password" class="form-control" path="senha"
 										value="${pessoa.senha}" />
 									<br />
 

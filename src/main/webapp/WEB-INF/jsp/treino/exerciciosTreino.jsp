@@ -83,7 +83,7 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-right">
-										<a href="/login" class="btn btn-default btn-flat">Sair</a>
+										<a href="/logout" class="btn btn-default btn-flat">Sair</a>
 									</div>
 								</li>
 							</ul></li>
@@ -147,6 +147,7 @@
 											<tr>
 												<th>Treino</th>
 												<th>Nome</th>
+												<th>Serie</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -154,6 +155,7 @@
 												<tr>
 													<td>${exercicio.idExercicio}</td>
 													<td>${exercicio.nome}</td>
+													<td>${exercicio.serie}</td>
 												</tr>
 											</c:forEach>
 										</tbody>

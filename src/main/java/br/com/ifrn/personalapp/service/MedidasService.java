@@ -44,4 +44,8 @@ public class MedidasService {
 	public List<Medidas> medidas() {
 		return medidasDAO.findAll();
 	}
+	
+	public Medidas medidasPessoa(Long id) {
+		return medidasDAO.findByPessoaIdPessoa(id);
+	}
 }

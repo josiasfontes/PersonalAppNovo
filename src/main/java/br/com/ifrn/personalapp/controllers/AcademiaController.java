@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.jsf.FacesContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -23,16 +24,31 @@ import br.com.ifrn.personalapp.service.PessoaService;
 
 @RestController
 public class AcademiaController {
-	//@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	
 	@Autowired AcademiaService academiaService;
 	@Autowired PessoaService pessoaService;
+	
+	Academia academiaTeste = new Academia();
+	Academia pessoaAcademia = new Academia();
+	Pessoa p = new Pessoa();
+	
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView homeAdmin() {
 		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return new ModelAndView("academia/home","academia", academiaService.getById(currentUser.getId()));
+		//if (academiaTeste.getIdAcademia() == null) {
+		p = pessoaService.pessoasPorId(currentUser.getId());
+		
+		//pessoaAcademia = academiaService.getById(p.getAcademia().getIdAcademia());
+		
+		//pessoa.setAcademia(p.getAcademia());
+			
+			
+			return new ModelAndView("academia/home","academia", academiaService.getById(p.getAcademia().getIdAcademia()));
+		//}else{
+			//return new ModelAndView("academia/home","academia", academiaService.getById(academiaTeste.getIdAcademia()));
+		//}
 	}
 	
 	@RequestMapping(value = "academia/criar", method = RequestMethod.GET)
@@ -47,6 +63,7 @@ public class AcademiaController {
 		}else{
 			academiaService.atualizarAcademia(academia);
 		}
+		academiaTeste.setIdAcademia(academia.getIdAcademia());
 		return new ModelAndView(new RedirectView("pessoaAdmin/criar"));
 	}
 	

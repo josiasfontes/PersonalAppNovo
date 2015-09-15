@@ -83,7 +83,7 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-right">
-										<a href="/login" class="btn btn-default btn-flat">Sair</a>
+										<a href="/logout" class="btn btn-default btn-flat">Sair</a>
 									</div>
 								</li>
 							</ul></li>
@@ -141,6 +141,7 @@
 										<thead>
 											<tr>
 												<th>Nome</th>
+												<th>Serie</th>
 												<th>Editar</th>
 												<th>Remover</th>
 											</tr>
@@ -150,6 +151,7 @@
 												<tr>
 													
 													<td>${exercicio.nome}</td>
+													<td>${exercicio.serie}</td>
 													<td><a
 														href="${pageContext.request.contextPath}/exercicio/editar/${exercicio.idExercicio}">
 															<i class="btn btn-primary">Editar</i>

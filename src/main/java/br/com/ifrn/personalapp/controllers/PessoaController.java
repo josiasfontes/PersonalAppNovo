@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import br.com.ifrn.personalapp.models.Academia;
 import br.com.ifrn.personalapp.models.Pessoa;
@@ -27,6 +28,9 @@ import br.com.ifrn.personalapp.service.PessoaService;
 @RestController
 public class PessoaController {
 
+	Academia pessoaAcademia = new Academia();
+	Pessoa p = new Pessoa();
+	
 	@Autowired
 	PessoaService pessoaService;
 	@Autowired
@@ -59,7 +63,7 @@ public class PessoaController {
 		} else {
 			pessoaService.atualizarPessoa(pessoa);
 		}
-		return new ModelAndView("base/login");
+		return new ModelAndView(new RedirectView("/logout"));
 	}
 
 	@Secured({"ROLE_USER", "ROLE_ADMIN"})
@@ -67,25 +71,37 @@ public class PessoaController {
 	public ModelAndView criarPessoa(@ModelAttribute Pessoa pessoa) {
 		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		pessoa.setRole(Role.ROLE_USER);
+
+		p = pessoaService.pessoasPorId(currentUser.getId());
 		
-		Academia academia = new Academia();
-		academia = academiaService.getById(currentUser.getId());
-		pessoa.setAcademia(academia);
+		pessoaAcademia = academiaService.getById(currentUser.getId());
+		
+		pessoa.setAcademia(p.getAcademia());
 		
 		if (pessoa.getIdPessoa() == null) {
 			pessoaService.salvarPessoa(pessoa);
+			
+			return new ModelAndView(new RedirectView("medidas/criar"));
 		} else {
 			pessoaService.atualizarPessoa(pessoa);
+			return new ModelAndView("pessoa/listar", "pessoas",
+					pessoaService.pessoasPorAcademiaAtivas(p.getAcademia().getIdAcademia()));
 		}
-		return new ModelAndView("pessoa/listar", "pessoas", pessoaService.pessoasPorAcademiaAtivas(currentUser.getId()));
+		
+		//return new ModelAndView("pessoa/listar", "pessoas", pessoaService.pessoasPorAcademiaAtivas(currentUser.getId()));
 	}
 
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "pessoa/ativar/{id}")
 	public ModelAndView ativarPessoa(@PathVariable Long id) {
 		pessoaService.ativarOuDesativar(id);
-		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return new ModelAndView("pessoa/listar", "pessoas", pessoaService.pessoasPorAcademiaAtivas(currentUser.getId()));
+		CurrentUser currentUser = (CurrentUser) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+
+		p = pessoaService.pessoasPorId(currentUser.getId());
+
+		return new ModelAndView("pessoa/listar", "pessoas",
+				pessoaService.pessoasPorAcademiaAtivas(p.getAcademia().getIdAcademia()));
 	}
 
 	@Secured("ROLE_ADMIN")
@@ -97,8 +113,13 @@ public class PessoaController {
 	@Secured("ROLE_ADMIN")
 	@RequestMapping(value = "pessoa/listar", method = RequestMethod.GET)
 	public ModelAndView listar() {
-		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return new ModelAndView("pessoa/listar", "pessoas",pessoaService.pessoasPorAcademiaAtivas(currentUser.getId()));
+		CurrentUser currentUser = (CurrentUser) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+
+		p = pessoaService.pessoasPorId(currentUser.getId());
+
+		return new ModelAndView("pessoa/listar", "pessoas",
+				pessoaService.pessoasPorAcademiaAtivas(p.getAcademia().getIdAcademia()));
 	}
 	
 	@Secured("ROLE_ADMIN")
@@ -127,11 +148,9 @@ public class PessoaController {
 	}
 
 	@RequestMapping(value = "api/pessoa/{id}", method = RequestMethod.GET)
-	public Pessoa pessoaApi(HttpServletResponse response,
-			@PathVariable("id") Long id) {
+	public Pessoa pessoaApi(HttpServletResponse response, @PathVariable("id") Long id) {
 		response.setHeader("Access-Control-Allow-Origin", "*");
-		response.setHeader("Access-Control-Allow-Methods",
-				"GET,PUT,POST,DELETE");
+		response.setHeader("Access-Control-Allow-Methods","GET,PUT,POST,DELETE");
 		return pessoaService.getById(id);
 	}
 

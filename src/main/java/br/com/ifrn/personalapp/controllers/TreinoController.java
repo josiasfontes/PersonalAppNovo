@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +28,7 @@ import br.com.ifrn.personalapp.service.TreinoService;
 public class TreinoController {
 
 	Pessoa pessoa = new Pessoa();
+	Pessoa p = new Pessoa();
 	Treino treino = new Treino();
 	
 	@Autowired TreinoService treinoService;
@@ -47,8 +50,13 @@ public class TreinoController {
 		}else{
 			treinoService.atualizarTreino(treino);
 		}
-		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return new ModelAndView("pessoa/listar", "pessoas", pessoaService.pessoasPorAcademiaAtivas(currentUser.getId()));
+		CurrentUser currentUser = (CurrentUser) SecurityContextHolder
+				.getContext().getAuthentication().getPrincipal();
+
+		p = pessoaService.pessoasPorId(currentUser.getId());
+
+		return new ModelAndView("pessoa/listar", "pessoas",
+				pessoaService.pessoasPorAcademiaAtivas(p.getAcademia().getIdAcademia()));
 	}
 	
 	@Secured("ROLE_ADMIN")
@@ -121,9 +129,10 @@ public class TreinoController {
 	}
 	
 	@RequestMapping(value = "api/treinos/{id}", method = RequestMethod.GET)
-	public List<Treino> treinosAtivoApi(@PathVariable("id") Long id) {
+	public List<Treino> treinosAtivoApi(HttpServletResponse response, @PathVariable("id") Long id) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Methods","GET,PUT,POST,DELETE");
 		return treinoService.treinosPessoaAtivo(id);
 	}
-	
 	
 }

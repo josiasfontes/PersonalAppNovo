@@ -9,4 +9,7 @@ import br.com.ifrn.personalapp.models.Medidas;
 public interface MedidasDAO extends JpaRepository<Medidas, Long> {
 	  
 	public Medidas findByIdMedidas(Long Id);
+	
+	public Medidas findByPessoaIdPessoa(Long id);
+	
 }

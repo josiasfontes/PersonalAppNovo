@@ -83,7 +83,7 @@
 								<!-- Menu Footer-->
 								<li class="user-footer">
 									<div class="pull-right">
-										<a href="/login" class="btn btn-default btn-flat">Sair</a>
+										<a href="/logout" class="btn btn-default btn-flat">Sair</a>
 									</div>
 								</li>
 							</ul></li>
@@ -143,11 +143,6 @@
 									<form:input class="form-control" path="nome"
 										value="${treino.nome}" />
 									<br />
-
-									<form:label path="serie">Serie</form:label>
-									<form:input class="form-control" path="serie"
-										value="${treino.serie}" />
-									<br />
 									
 									<form:label path="observacao">Observacao</form:label>
 									<form:input class="form-control" path="observacao"
@@ -172,8 +167,8 @@
 											</tr>
 										</c:forEach>
 									</table>
-									</br>
-									</br>
+									<br />
+									<br />
 
 									<form:button class="btn btn-primary" type="submit">Cadastrar</form:button>
 								</form:form>
